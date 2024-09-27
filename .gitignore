@@ -1,0 +1,16 @@
+#dir
+.cache/*
+.local/*
+.python_history/*
+#file
+.env
+docker_tutorial.txt
+.python_history
+.bash_history
+
+#django
+*.log
+*.pyc
+__pycache__/
+db-volumes/
+db.sqlite3
