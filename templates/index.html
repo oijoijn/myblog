@@ -1,25 +1,28 @@
 {% extends 'base.html' %}
-
-{% block title %}
-{% if user.is_authenticated %}
-<div class="h1">MyPage</div>
-{% else %}
-<div class="h1">Main</div>
-{% endif %}
-{% endblock %}
+{% load static %}
+<!-- {% block title %}
+{% endblock %} -->
 
 {% block content %}
-<div class="header">
-{% if user.is_authenticated %}
-    <div class="h2">Welcome {{ user.username }}</div>
-    <div class="buttons">
-        <a href="{% url 'accounts:logout' %}" class="button">Logout</a>
-    </div>
-    <div class="buttons">
-        {% else %}
-        <a href="{% url 'accounts:signup' %}" class="button">Signup</a>
-        <a href="{% url 'accounts:login' %}" class="button">Login</a>
-    </div>
-    {% endif %}
+<div class="image-grid">
+    <a href="{% url 'blog:self_introduction' %}">
+        <img class="hover-image" src='{% static "images/test.png" %}' alt="表示できません">
+    </a>
+    <a href="{% url 'blog:self_introduction' %}">
+        <img class="hover-image" src='{% static "images/test.png" %}' alt="表示できません">
+    </a>
+    <a href="{% url 'blog:self_introduction' %}">
+        <img class="hover-image" src='{% static "images/test.png" %}' alt="表示できません">
+    </a>
+    <a href="{% url 'blog:self_introduction' %}">
+        <img class="hover-image" src='{% static "images/test.png" %}' alt="表示できません">
+    </a>
+    <a href="{% url 'blog:self_introduction' %}">
+        <img class="hover-image" src='{% static "images/test.png" %}' alt="表示できません">
+    </a>
+    <a href="{% url 'blog:self_introduction' %}">
+        <img class="hover-image" src='{% static "images/test.png" %}' alt="表示できません">
+    </a>
 </div>
+
 {% endblock %}

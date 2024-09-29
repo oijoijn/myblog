@@ -1,14 +1,8 @@
 from django.contrib.auth import login, authenticate
-from django.views.generic import TemplateView, CreateView
+from django.views.generic import CreateView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
 from . import forms
-
-class IndexView(TemplateView):
-    """
-    動作:home
-    """
-    template_name = "index.html"
 
 
 class SignupView(CreateView):
@@ -17,7 +11,7 @@ class SignupView(CreateView):
     """
     form_class = forms.SignUpForm 
     template_name = "accounts/signup.html" 
-    success_url = reverse_lazy("accounts:index") 
+    success_url = reverse_lazy("blog:index") 
 
     def form_valid(self, form):
         # ユーザー作成後にそのままログイン状態にする設定
@@ -40,4 +34,4 @@ class LogoutView(LogoutView):
     """
     動作:logout
     """
-    success_url = reverse_lazy("accounts:index")
+    success_url = reverse_lazy("blog:index")
