@@ -8,11 +8,10 @@ services:
     ports:
       - 3306:3306
     environment:
-      TZ: ${TZ}  
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}  
-      MYSQL_DATABASE: ${MYSQL_DATABASE}  
-      MYSQL_USER: ${MYSQL_USER}  
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}  
+      TZ: "${TZ}"  
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"  
+      MYSQL_DATABASE: "${DATABASE}"  
+      MYSQL_USER: "${USER}"  
 
   django: 
     build: .
@@ -22,6 +21,8 @@ services:
     ports:
       - 127.0.0.1:8000:8000
     tty: true
+    depends_on:
+      - mysql 
 
 volumes:
   create_myblog-db:
