@@ -1,0 +1,21 @@
+.header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start; /* ボタンを右上に配置 */
+  padding: 10px; 
+}
+
+.buttons {
+  display: flex; /* ボタンを横に並べる */
+  gap: 1180px; /* ボタン間の隙間 */
+}
+
+.button {
+  /* ボタンのスタイル */
+  padding: 5px 11px;
+  border: none;
+  background-color: #0d0203;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  border-radius: 5px;
+}
