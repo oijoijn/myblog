@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{% if user.is_authenticated %}
+<div class="h1">MyPage</div>
+{% else %}
+<div class="h1">Main</div>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="header">
+{% if user.is_authenticated %}
+    <div class="h2">Welcome {{ user.username }}</div>
+    <div class="buttons">
+        <a href="{% url 'accounts:logout' %}" class="button">Logout</a>
+    </div>
+    <div class="buttons">
+        {% else %}
+        <a href="{% url 'accounts:signup' %}" class="button">Signup</a>
+        <a href="{% url 'accounts:login' %}" class="button">Login</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
