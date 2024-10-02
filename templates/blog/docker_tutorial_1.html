@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ article.title }}</h1>
+  <p>{{ article.content|safe }}</p>
+  <p>作成日: {{ article.created_at }}</p>
+
+  <hr>
+<div style="font-family: Arial, sans-serif; line-height: 1.6; padding: 20px;">
+  <h1>このサイトについて</h1>
+  <p>
+    このサイトでは、筆者のアウトプットを目的として記事を書いています。可能な限り正確な情報を提供するよう努めていますが、もし誤りがあれば、下記のコメント欄でご指摘いただけるとありがたいです。
+  </p>
+  
+  <p>
+    サイトの趣旨としては、<strong>Dockerのチュートリアル</strong>を読んで理解しにくかった部分を補い、これからDockerを学ぶ方々のために、<strong>Dockerの基本概念やコマンド</strong>をわかりやすく解説することを目指しています。また、本サイトでは<strong>CUI（CLI）</strong>を使った解説を行います。
+  </p>
+
+  <h2>Dockerの概念図</h2>
+  <p>以下にDockerの概念図を示します。</p>
+  <p>
+    簡単に言えば、<strong>Docker Hub</strong>からDockerイメージをダウンロードし、必要であれば<strong>Dockerfile</strong>を使って独自のイメージを作成します。その後、そのイメージからDockerコンテナ（仮想環境）を作成して起動します。コンテナ同士で通信するために<strong>Dockerネットワーク</strong>を使用し、コンテナ内で利用したデータベースなどのデータを保持するために<strong>Dockerボリューム</strong>を使います。この一連の流れを理解できるようになることが、このサイトの目標です。
+  </p>
+
+  <h2>1. Dockerとは</h2>
+  <p>
+    Dockerを一言でまとめると、<strong>環境の配布と共有ができるサービス</strong>です。Dockerでは、仮想環境のことを<strong>コンテナ</strong>と呼び、コンテナは<strong>docker image</strong>をもとに作成されます。つまりdocker imageとは仮想環境の<strong>設計図</strong>です。
+  </p>
+  <p>
+    <strong>Docker hub</strong>には様々なdocker imageが置いてあり、<code>docker pull</code>コマンドでイメージをダウンロードできます。また、オリジナルのイメージが必要な場合には、<strong>Dockerfile</strong>を使って独自のイメージを作成できます。
+  </p>
+
+  <p>
+    コンテナは通常、他のコンテナやホストOSにアクセスできないため、<strong>docker network</strong>を使って通信を可能にし、データの永続化には<strong>docker volume</strong>を使用します。バインドマウントを利用すれば、ホストマシンとコンテナ間でファイルの変更を反映させることができます。
+  </p>
+
+  <h3>まとめ</h3>
+  <ul>
+    <li><strong>docker hub:</strong> docker imageが置いてある場所</li>
+    <li><strong>コンテナ:</strong> 仮想環境</li>
+    <li><strong>docker image:</strong> コンテナの設計図</li>
+    <li><strong>Dockerfile:</strong> docker imageを作成するためのファイル</li>
+    <li><strong>docker network:</strong> コンテナ間の通信を可能にする</li>
+    <li><strong>docker volume:</strong> データの永続化を行う</li>
+    <li><strong>バインドマウント:</strong> ホストマシンとコンテナのファイル変更を共有する</li>
+  </ul>
+
+  <h2>2. Djangoを使用したDockerの解説</h2>
+  <p>
+    概念図に沿って、コマンドと解説を行います。
+  </p>
+  <p>まず、GitHubからクローンします。</p>
+  <pre><code>git clone https://github.com/docker/getting-started.git</code></pre>
+
+  <p>次に、<code>getting-started/app</code>にDockerfileを作成します。</p>
+  <p>Dockerfileからdocker imageを作成するために、以下のコマンドを使用します。</p>
+  <pre><code>docker build -t demo .</code></pre>
+
+  <p>
+    コンテナの起動は以下のコマンドです。
+  </p>
+  <pre><code>docker run -dp 3000:3000 getting-started</code></pre>
+
+  <h2>3. 使用頻度の高いコマンド</h2>
+  <ul>
+    <li><strong>イメージの確認:</strong> <code>docker image ls</code></li>
+    <li><strong>コンテナの確認:</strong> <code>docker ps</code>（起動中のみ） / <code>docker ps -a</code>（全てのコンテナ）</li>
+    <li><strong>コンテナの削除:</strong> <code>docker rm -f &lt;container-id&gt;</code></li>
+    <li><strong>コンテナの停止:</strong> <code>docker stop &lt;container-id&gt;</code></li>
+    <li><strong>コンテナの起動:</strong> <code>docker start &lt;container-id&gt;</code></li>
+    <li><strong>ネットワークの作成:</strong> <code>docker network create &lt;name&gt;</code></li>
+    <li><strong>ボリュームの作成:</strong> <code>docker volume create &lt;name&gt;</code></li>
+  </ul>
+</div>
+
+
+  <hr>
+
+  <h2>コメント</h2>
+  <ul>
+    {% for comment in comments %}
+      <li><strong>{{ comment.user }}:</strong> {{ comment.comment }} <em>({{ comment.created_at }})</em></li>
+    {% empty %}
+      <li>まだコメントがありません。</li>
+    {% endfor %}
+  </ul>
+
+  <hr>
+
+  <h2>コメントを投稿する</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">投稿</button>
+  </form>
+{% endblock %}

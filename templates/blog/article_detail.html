@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ article.title }}</h1>
+  <p>{{ article.content|safe }}</p>
+  <p>作成日: {{ article.created_at }}</p>
+
+  <hr>
+  <h2>test0</h2>
+
+  <hr>
+
+  <h2>コメント</h2>
+  <ul>
+    {% for comment in comments %}
+      <li><strong>{{ comment.user }}:</strong> {{ comment.comment }} <em>({{ comment.created_at }})</em></li>
+    {% empty %}
+      <li>まだコメントがありません。</li>
+    {% endfor %}
+  </ul>
+
+  <hr>
+
+  <h2>コメントを投稿する</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">投稿</button>
+  </form>
+{% endblock %}
