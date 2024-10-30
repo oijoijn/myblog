@@ -2,6 +2,18 @@
 {% load static %}
 
 {% block content %}
+  <div id="toc">
+    <h2>目次</h2>
+    <ul>
+      <li><a href="#docker-what">1. Dockerとは</a></li>
+      <li><a href="#mount">2. Mount</a></li>
+      <li><a href="#docker-network">3. Docker Network</a></li>
+      <li><a href="#docker-compose">4. Docker Compose</a></li>
+      <li><a href="#summary">5. まとめ</a></li>
+    </ul>
+  </div>
+
+
   {% include 'blog/article.html' %}
 
   <p class="center">
@@ -14,7 +26,7 @@
   </div>
 
 
-  <h2>1. Dockerとは</h2>
+  <h2 id="docker-what">1. Dockerとは</h2> 
 
   <p>
     Dockerを一言でまとめると,<strong>仮想環境のコンテナ化とその配布・管理を行うためのプラットフォーム</strong>である.また,osや環境変数の違いを吸収してくれるため複数人での開発においてos,環境特有のエラーを防ぐことができる.
@@ -73,7 +85,7 @@
     コンテナは原則として他のコンテナやホストOSにアクセスすることができない.つまり,コンテナ内にサーバーを立ててもホストos側からアクセスすることができない.また,コンテナを削除するとコンテナ内で行った変更がすべて取り消されるため,作成したファイルが失われる.それを防ぐため、<strong>Docker network</strong>や<strong>マウント</strong>が使用される.
   </p>
 
-  <h2>マウント</h2>
+  <h2 id="mount">2. Mount</h2>
 
   <p>
     Dokcerのマウントには3種類あるがここでは2つ紹介する.<strong>バインドマウント(bind mount)</strong>と<strong>ボリュームマウント(volume mount)</strong>である.これらは，主にコンテナ内の変更を維持するために存在するが使用用途の違いがある.
@@ -110,6 +122,8 @@
     何度も言うことになりますが,コンテナは原則として他のコンテナやホストOSにアクセスすることができない.上記ではマウントによりホストosやDocker管理下のストレージとマウントする方法を紹介しましたここではコンテナ間の通信を行えるようにする.
   </p>
 
+  <h2 id="docker-network">3. Docker Network</h2>
+
   <p>
     <strong>Docker network</strong><br>
     Docker networkはコンテナ間の通信を可能にするもの.例えば,フロントエンドのコンテナ,バックエンドのコンテナ,データベースのコンテナを立てた際このままではお互いに通信できない.そこでDocker networkを使用することにより3つのコンテナ間の通信が可能になる.
@@ -123,6 +137,8 @@
   <p>
     これまでに紹介したサービスをおさらいすると上記のようになる.ただ,これをすべてコマンドで行うと複数行のコマンドが必要となりとても複雑になる.しかし,Docker composeを使用することで上記で紹介した機能すべてを1行のコマンドで実行できる.
   </p>
+
+  <h2 id="docker-compose">4. Docker Compose</h2>
 
   <p>
     <strong>Docker Compose</strong><br>
@@ -171,7 +187,7 @@
     docker-compse.ymlに直接環境変数を書くのはセキュリティ上よくないので<a href="https://docs.docker.jp/compose/environment-variables.html">env</a>ファイルから読み込むようにする.
   </p>
 
-  <h3>まとめ</h3>
+  <h2 id="summary">5. まとめ</h2>
 
   <p>
     <strong>Docker Hub</strong>からイメージをダウンロードし,必要であれば<strong>Dockerfile</strong>を使って独自のイメージを作成しコンテナを起動する.コンテナ同士で通信するために<strong>Docker network</strong>を使用し、コンテナ内で利用したデータベースなどのデータを永続化するために<strong>Docker volume</strong>を使用する.

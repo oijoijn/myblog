@@ -14,7 +14,7 @@
     <header class="header">
         <div class="logo">
             <h1><a href="{% url 'blog:index' %}">
-                <img src="{% static 'images/logo.png' %}" alt="ロゴ" />
+                <p>技術探検</p>
             </a></h1>
         </div>
         <div class="auth-buttons">
@@ -32,6 +32,7 @@
         {% block content %}
         {% endblock %}
     </div>
+    <!-- <script src="{% static 'js/script.js' %}"></script> -->
 </body>
 
 </html>

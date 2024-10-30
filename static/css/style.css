@@ -1,10 +1,9 @@
 /* 全体の背景色 */
 body {
-    background-color: #d3d3d3;
-    /* background-color: #eb5454;  */
+    background-color: #f4f4f4; /* 明るいグレー */
     margin: 0;
     text-align: left;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* よりモダンなフォント */
 }
 
 /* ヘッダーのスタイル */
@@ -12,15 +11,29 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #333; /* 黒色背景 */
-    color: white;
+    background-color: #4a4a4a; /* ダークグレー */
+    color: #ffffff; /* 白色 */
     padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
 }
 
 /* ロゴ部分（左側） */
-.logo img {
-    max-width: 100%;  /* 画面幅に応じてリサイズ */
-    height: auto;     /* アスペクト比を保つ */
+.logo h1 {
+    font-size: 2.5em; /* フォントサイズを調整 */
+    margin: 0; /* マージンをゼロに */
+    text-align: center; /* 中央揃え */
+}
+
+.logo p {
+    color: #19d8f6; /* テキスト色を青に */
+    font-weight: bold; /* 太字に */
+    text-transform: uppercase; /* 大文字に変換 */
+    letter-spacing: 1px; /* 文字間隔を少し広げる */
+    transition: color 0.3s ease; /* ホバー時のスムーズな変化 */
+}
+
+.logo p:hover {
+    color: #0056b3; /* ホバー時に色を濃い青に */
 }
 
 
@@ -31,34 +44,70 @@ body {
 }
 
 .auth-buttons a {
-    color: white;
+    color: #ffffff; /* 白色 */
     text-decoration: none;
-    background-color: #555;
+    background-color: #007bff; /* ブルー */
     padding: 10px 20px;
     border-radius: 5px;
     transition: background-color 0.3s ease;
 }
 
 .auth-buttons a:hover {
-    background-color: #777;
+    background-color: #0056b3; /* 濃いブルー */
 }
 
 /* メインコンテナ */
 .container {
     padding: 20px;
-    max-width: 1000px; /* 500pxで折り返し */
+    margin-right: 250px; /* 目次のスペースを確保 */
+    background-color: #ffffff; /* 白色背景 */
+    border-radius: 8px; /* 角を丸く */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
 }
 
+/* 目次の固定 */
+#toc {
+    position: fixed;
+    right: 20px; /* 画面の右端から20pxの位置に固定 */
+    top: 100px; /* 画面の上から100pxの位置に固定 */
+    width: 220px; /* 目次の幅 */
+    background-color: #ffffff; /* 白色背景 */
+    padding: 10px;
+    border: 1px solid #e0e0e0; /* 軽い境界線 */
+    border-radius: 8px; /* 角を丸く */
+    overflow: auto;
+    max-height: 80vh; /* 目次が画面外に出ないように制限 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
+}
+
+#toc ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#toc li {
+    margin-bottom: 10px;
+}
+
+/* リンクのスタイル */
+#toc li a {
+    color: #007bff; /* ブルー */
+    text-decoration: none; /* 下線を消す */
+    transition: color 0.3s ease;
+}
+
+#toc li a:hover {
+    color: #0056b3; /* 濃いブルー */
+}
 
 .center {
     text-align: center !important;
 }
 
-
 /* グリッドレイアウト */
 .image-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3つのカラム 3つずつ表示*/
+    grid-template-columns: repeat(3, 1fr); /* 3つのカラム 3つずつ表示 */
     gap: 20px; /* 画像の間隔を調整 */
 }
 
@@ -72,5 +121,5 @@ body {
 /* ホバー時の効果 */
 .hover-image:hover {
     transform: scale(1.05); /* 画像を少し拡大 */
-    opacity: 0.8;          /* 少し透明に */
+    opacity: 0.9;          /* 少し透明に */
 }
