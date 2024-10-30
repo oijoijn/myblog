@@ -7,15 +7,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href='{% static "css/style.css" %}' />
-    <title>スキルアップジャーニー</title>
+    <title>技術探検</title>
 </head>
 
 <body>
     <header class="header">
         <div class="logo">
-          <h1><a href="{% url 'blog:index' %}">スキルアップジャーニー</a></h1>
+            <h1><a href="{% url 'blog:index' %}">
+                <img src="{% static 'images/logo.png' %}" alt="ロゴ" />
+            </a></h1>
         </div>
         <div class="auth-buttons">
+            <!-- loginボタンの動作 -->
             {% if user.is_authenticated %}
                 <a href="{% url 'accounts:logout' %}" class="button">Logout</a>
             {% else %}
@@ -26,8 +29,6 @@
     </header>
 
     <div class="container">
-        <!-- {% block title %}
-        {% endblock %} -->
         {% block content %}
         {% endblock %}
     </div>

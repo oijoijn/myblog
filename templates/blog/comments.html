@@ -1,0 +1,17 @@
+  <h2 class="center">コメント</h2>
+  <ul class="center">
+    {% for comment in comments %}
+      <li><strong>{{ comment.user }}:</strong> {{ comment.comment }} <em>({{ comment.created_at }})</em></li>
+    {% empty %}
+      <p class="center">まだコメントがありません。</p>
+    {% endfor %}
+  </ul>
+
+  <hr>
+
+  <h2 class="center">コメントを投稿する</h2>
+  <form class="center" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">投稿</button>
+  </form>

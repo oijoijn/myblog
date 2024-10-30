@@ -1,7 +1,9 @@
 /* 全体の背景色 */
 body {
-    background-color: #d3d3d3; /* 灰色 */
+    background-color: #d3d3d3;
+    /* background-color: #eb5454;  */
     margin: 0;
+    text-align: left;
     font-family: Arial, sans-serif;
 }
 
@@ -16,10 +18,11 @@ body {
 }
 
 /* ロゴ部分（左側） */
-.logo h1 {
-    margin: 0;
-    font-size: 24px;
+.logo img {
+    max-width: 100%;  /* 画面幅に応じてリサイズ */
+    height: auto;     /* アスペクト比を保つ */
 }
+
 
 /* 認証ボタン（右側） */
 .auth-buttons {
@@ -43,13 +46,19 @@ body {
 /* メインコンテナ */
 .container {
     padding: 20px;
-    text-align: center;
+    max-width: 1000px; /* 500pxで折り返し */
 }
+
+
+.center {
+    text-align: center !important;
+}
+
 
 /* グリッドレイアウト */
 .image-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3つのカラム */
+    grid-template-columns: repeat(3, 1fr); /* 3つのカラム 3つずつ表示*/
     gap: 20px; /* 画像の間隔を調整 */
 }
 
@@ -62,6 +71,6 @@ body {
 
 /* ホバー時の効果 */
 .hover-image:hover {
-    transform: scale(1.1); /* 画像を少し拡大 */
+    transform: scale(1.05); /* 画像を少し拡大 */
     opacity: 0.8;          /* 少し透明に */
 }

@@ -1,14 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
-<!-- {% block title %}
-{% endblock %} -->
 
 {% block content %}
 <div class="image-grid">
     {% for article in articles %}
     <h2>
         <a href="{% url 'blog:article_detail' article.pk %}">
-            <img class="hover-image" src="{% static 'images/test.png' %}" alt="表示できません">
+            <img class="hover-image" src="{% static 'images/test2.png' %}" alt="表示できません">
             <p>{{ article.title }} 作成日: {{ article.created_at }}</p>
         </a>
     </h2>

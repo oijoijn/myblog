@@ -6,10 +6,6 @@ from . import views
 app_name = "blog"
 
 urlpatterns = [
-    path("", views.ArticleListView.as_view(), name="index"),
-    path("article/<int:pk>/", views.ArticleDetailView.as_view(), name="article_detail"),
-
+    path("", views.BlogPostListView.as_view(), name="index"),
+    path("article/<int:pk>/", views.BlogPostDetailView.as_view(), name="article_detail"),
 ]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

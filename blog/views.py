@@ -1,36 +1,35 @@
 from django.shortcuts import get_object_or_404, redirect, render
-from django.views.generic import ListView, DetailView, TemplateView
+from django.views.generic import ListView
 from django.views import View
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.http import Http404
 from django.template.exceptions import TemplateDoesNotExist
 from . import models, forms
 
-class ArticleListView(ListView):
+class BlogPostListView(ListView):
     """
     動作:記事を表示する
     """
-    model = models.Article
+    model = models.BlogPost
     template_name = 'index.html'
     context_object_name = 'articles'
     ordering = ['-created_at']
 
 @method_decorator(login_required, name='dispatch')
-class ArticleDetailView(View):
+class BlogPostDetailView(View):
     """
     動作:記事詳細ビュー & コメント投稿 (DetailView + View)
     クラスベースビューにログインを要求する
     """
-    
+
     def get(self, request, pk):
-        article = get_object_or_404(models.Article, pk=pk)
+        article = get_object_or_404(models.BlogPost, pk=pk)
         comments = article.comments.all()
         form = forms.CommentForm()
 
         # pkに基づいてテンプレート名を動的に決定
-        template_name = f'blog/docker_tutorial_{pk}.html'
+        template_name = article.html_file
 
         # テンプレートが存在しない場合に404を返すためのチェック
         dict = {
@@ -44,7 +43,7 @@ class ArticleDetailView(View):
             raise Http404("Template not found")
 
     def post(self, request, pk):
-        article = get_object_or_404(models.Article, pk=pk)
+        article = get_object_or_404(models.BlogPost, pk=pk)
         comments = article.comments.all()
         form = forms.CommentForm(request.POST)
         
@@ -60,8 +59,8 @@ class ArticleDetailView(View):
         # pkに基づいてテンプレート名を動的に決定
         template_name = f'blog/docker_tutorial_{pk}.html'
         dict = {
-            'article': article, 
-            'comments': comments, 
+            'article': article,
+            'comments': comments,
             'form': form
         }
 

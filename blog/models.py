@@ -1,30 +1,27 @@
 from django.db import models
 from django.conf import settings
-from django.utils import timezone
 
-class Article(models.Model):
+class BlogPost(models.Model):
     """
-    動作:記事のモデル
+    動作:ブログ記事のメタデータを保存するモデル
     """
-    title = models.CharField(max_length=100)
-    content = models.TextField()  # 管理者がHTMLで記事を書く
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(default=timezone.now)
-    pdf_file = models.FileField(upload_to='pdfs/', blank=True, null=True)
-    image_file = models.ImageField(upload_to='images/', blank=True, null=True)
+    title = models.CharField(max_length=255)  # 記事のタイトル
+    created_at = models.DateTimeField(auto_now_add=True)  # 作成日
+    updated_at = models.DateTimeField(auto_now=True)  # 更新日
+    html_file = models.CharField(max_length=255)  # 記事に対応するHTMLファイルのパス
 
     def __str__(self):
-        return f"title: {self.title}, owner: {self.owner.username}"
+        return self.title
 
 class Comment(models.Model):
     """
     動作:コメント
     """
-    article = models.ForeignKey(Article, related_name='comments', on_delete=models.CASCADE)
+    post = models.ForeignKey(BlogPost, related_name='comments', on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     comment = models.TextField(max_length=200, blank=False, null=False)
-    date = models.DateTimeField(auto_now_add=True)
-    created_at = models.DateTimeField(default=timezone.now)
+    created_at = models.DateTimeField(auto_now_add=True)  # 作成日
+    updated_at = models.DateTimeField(auto_now=True)  # 更新日
 
     def __str__(self):
         return f"Comment by {self.user} on {self.article}"

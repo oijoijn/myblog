@@ -1,96 +1,186 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-  <h1>{{ article.title }}</h1>
-  <p>{{ article.content|safe }}</p>
-  <p>作成日: {{ article.created_at }}</p>
+  {% include 'blog/article.html' %}
 
-  <hr>
-<div style="font-family: Arial, sans-serif; line-height: 1.6; padding: 20px;">
-  <h1>このサイトについて</h1>
-  <p>
-    このサイトでは、筆者のアウトプットを目的として記事を書いています。可能な限り正確な情報を提供するよう努めていますが、もし誤りがあれば、下記のコメント欄でご指摘いただけるとありがたいです。
-  </p>
-  
-  <p>
-    サイトの趣旨としては、<strong>Dockerのチュートリアル</strong>を読んで理解しにくかった部分を補い、これからDockerを学ぶ方々のために、<strong>Dockerの基本概念やコマンド</strong>をわかりやすく解説することを目指しています。また、本サイトでは<strong>CUI（CLI）</strong>を使った解説を行います。
+  <p class="center">
+    Dockerのチュートリアルを読んで理解するのに苦労したので,これからDockerを学ぶ方々の助けになればと思い書いています.また,公式ドキュメントを読むのが一番の勉強になると考えているのでここでは概念的な話を行います.
   </p>
 
-  <h2>Dockerの概念図</h2>
-  <p>以下にDockerの概念図を示します。</p>
-  <p>
-    簡単に言えば、<strong>Docker Hub</strong>からDockerイメージをダウンロードし、必要であれば<strong>Dockerfile</strong>を使って独自のイメージを作成します。その後、そのイメージからDockerコンテナ（仮想環境）を作成して起動します。コンテナ同士で通信するために<strong>Dockerネットワーク</strong>を使用し、コンテナ内で利用したデータベースなどのデータを保持するために<strong>Dockerボリューム</strong>を使います。この一連の流れを理解できるようになることが、このサイトの目標です。
-  </p>
+  <p class="center">概念図1</p>
+  <div class="center">
+  <img  src="{% static 'images/docker_tutorial_1.png' %}" alt="表示できません">
+  </div>
+
 
   <h2>1. Dockerとは</h2>
+
   <p>
-    Dockerを一言でまとめると、<strong>環境の配布と共有ができるサービス</strong>です。Dockerでは、仮想環境のことを<strong>コンテナ</strong>と呼び、コンテナは<strong>docker image</strong>をもとに作成されます。つまりdocker imageとは仮想環境の<strong>設計図</strong>です。
+    Dockerを一言でまとめると,<strong>仮想環境のコンテナ化とその配布・管理を行うためのプラットフォーム</strong>である.また,osや環境変数の違いを吸収してくれるため複数人での開発においてos,環境特有のエラーを防ぐことができる.
+    <br>
+    Dockerでは,仮想環境のことを<strong>コンテナ</strong>と呼び,<strong>Docker Image</strong>を元に作成される.
   </p>
+
+  <p><strong>Docker用語</strong></p>
+  <ul>
+    <li>仮想環境=コンテナ</li>
+    <li>Docker Image=コンテナの元になるもの,設定ファイル,スクリプト,などが含まれている</li>
+  </ul>
+
   <p>
-    <strong>Docker hub</strong>には様々なdocker imageが置いてあり、<code>docker pull</code>コマンドでイメージをダウンロードできます。また、オリジナルのイメージが必要な場合には、<strong>Dockerfile</strong>を使って独自のイメージを作成できます。
+    Dockerサービスの一つである<strong>Docker Hub</strong>には様々なDocker Image(イメージ)が置かれており,<strong>Docker pull</strong>コマンドでイメージのダウンロードを行うか<strong>Dockerfile</strong>を使用してオリジナルのイメージを作成することができる.
   </p>
 
   <p>
-    コンテナは通常、他のコンテナやホストOSにアクセスできないため、<strong>docker network</strong>を使って通信を可能にし、データの永続化には<strong>docker volume</strong>を使用します。バインドマウントを利用すれば、ホストマシンとコンテナ間でファイルの変更を反映させることができます。
+    <strong>Dockerfileが必要になるタイミング<br></strong>
+    例えば,<a href=https://hub.docker.com/_/django>Docker Hub</a>にあるDjnagoイメージを見に行くとpython 3.4が使用されておりとても古い.Dockerfileを使用することで最新のpythonや指定のパッケージで開発することができる.
+  </p>
+
+  <p>
+    Dockerfileはイメージのビルド手順を記述したファイルなので,Docker buildコマンドを使用することでDockerfileからイメージの作成することができる.
+    <br>
+    ※大文字はDockerfileのコマンド
+  </p>
+
+  <p><strong>Dockerfileの例</strong></p>
+    <pre><code>
+      # syntax=docker/dockerfile:1
+      FROM python:3.8                                          #元となるイメージ イメージ名:バージョンと書く,イメージ名だけだと最新versionが使用される
+      WORKDIR /app                                             #コンテナ内の絶対パスからの作業ディレクトリを指定,mkdir -p のような動作
+      COPY requirements.txt .                                  #指定のディレクトリやファイルをWORKDIRにコピー ホストosのpath コンテナ内のpath と書く
+      RUN pip install --no-cache-dir -r requirements.txt       #コマンドを実行
+    </code></pre>
+
+  <p>
+    <strong>整理</strong>
+    <br>
+    Docker pull     =  Docker Hubにあるイメージをlocalマシンにinstall<br>
+    Dockerfile      =  オリジナルイメージを定義<br>
+    Docker build    =  Dockerfileからイメージの作成を行う<br>
+  </p>
+
+  <p>
+    ここまでの概念図
+  </p>
+
+  <p class="center">概念図2</p>
+  <div class="center">
+  <img  src="{% static 'images/docker_tutorial_2.png' %}" alt="表示できません">
+  </div>
+
+  <p>
+    コンテナは原則として他のコンテナやホストOSにアクセスすることができない.つまり,コンテナ内にサーバーを立ててもホストos側からアクセスすることができない.また,コンテナを削除するとコンテナ内で行った変更がすべて取り消されるため,作成したファイルが失われる.それを防ぐため、<strong>Docker network</strong>や<strong>マウント</strong>が使用される.
+  </p>
+
+  <h2>マウント</h2>
+
+  <p>
+    Dokcerのマウントには3種類あるがここでは2つ紹介する.<strong>バインドマウント(bind mount)</strong>と<strong>ボリュームマウント(volume mount)</strong>である.これらは，主にコンテナ内の変更を維持するために存在するが使用用途の違いがある.
+  </p>
+
+  <p>
+    <strong>ボリュームマウント</strong>はデータベースに対して使用される.コンテナ削除後もデータを永続化することができコンテナ間でのデータ共有も可能である.マウントは,コンテナのディレクトリとDockerが管理しているストレージである.また,Docker Volumeはマウントしているコンテナを削除しても消えることがない.
+  </p>
+
+  <p>
+    <strong>バインドマウント</strong>はホストosとコンテナに対し使用される.
+    ファイルの実行はコンテナ内で行うがファイルの編集をホストosで行いたいときにバインドマウントが使用される(コンテナ内にvscodeをinstallしていないため).
+  </p>
+
+  <p>
+    <strong>注意</strong><br>
+    マウントコマンドはtype=hoge, src というように空白を作るとエラーが起こる.<br>
+    srcでホストosのpathまたはボリューム,targetでコンテナ上のpathを指定する.<br>
+  </p>
+
+  <p>
+    <strong>Docker用語</strong>
+    
+    バインドマウント    =  ホストosとコンテナをマウントする<br>
+    ボリュームマウント  =  コンテナとdockerをマウントする<br>
+  </p>
+
+  <p class="center">概念図3</p>
+  <div class="center">
+  <img  src="{% static 'images/docker_tutorial_3.png' %}" alt="表示できません">
+  </div>
+
+  <p>
+    何度も言うことになりますが,コンテナは原則として他のコンテナやホストOSにアクセスすることができない.上記ではマウントによりホストosやDocker管理下のストレージとマウントする方法を紹介しましたここではコンテナ間の通信を行えるようにする.
+  </p>
+
+  <p>
+    <strong>Docker network</strong><br>
+    Docker networkはコンテナ間の通信を可能にするもの.例えば,フロントエンドのコンテナ,バックエンドのコンテナ,データベースのコンテナを立てた際このままではお互いに通信できない.そこでDocker networkを使用することにより3つのコンテナ間の通信が可能になる.
+  </p>
+
+  <p class="center">概念図4</p>
+  <div class="center">
+  <img  src="{% static 'images/docker_tutorial_4.png' %}" alt="表示できません">
+  </div>
+
+  <p>
+    これまでに紹介したサービスをおさらいすると上記のようになる.ただ,これをすべてコマンドで行うと複数行のコマンドが必要となりとても複雑になる.しかし,Docker composeを使用することで上記で紹介した機能すべてを1行のコマンドで実行できる.
+  </p>
+
+  <p>
+    <strong>Docker Compose</strong><br>
+    Docker composeはdocker-compose.ymlファイルを使用する.Dockerfileがコンテナの定義を書くのに対しdocker-compose.ymlは設定やサービス間の連携を書く.また,Docker networkやDocker volumeを事前に作成していなくとも自動的に作成される.
+  </p>
+
+  <p><strong>docker-compse.ymlの例</strong></p>
+    <pre><code>
+      services:
+        mysql:                                            # コンテナ名 自由に設定可能
+          image: mysql:8.0                                # 使用するイメージ
+          volumes:                                        # ボリュームマウント（データの永続化）
+            - create_myblog-db:/var/lib/mysql             # ローカルのデータをMySQLのデータディレクトリにマウント
+          ports:                                          # 使用するポート番号
+            - 3306:3306
+          environment:                                    # 環境変数（MySQLの設定）
+            MYSQL_ROOT_PASSWORD: hogehoge
+            MYSQL_DATABASE: hogehoge
+            MYSQL_USER: hogehoge
+
+        django:
+          build: .                                        # オリジナルイメージを使用するためDockerfileのパスを指定
+          command: /bin/bash
+          volumes:                                        # バインドマウント（ホストとコンテナでディレクトリを共有）
+            - path:path
+          ports:                                          # Djangoのアプリケーションに対するポートマッピング
+            - 127.0.0.1:8000:8000
+          tty: true
+          depends_on:                                     # mysqlコンテナが先に起動するように依存関係を指定
+            - mysql
+
+      volumes:
+        create_myblog-db:                                 # ボリュームの定義（MySQL用データの永続化に使用）
+    </code></pre>
+
+  <p>
+    Docker networkコマンド
+    <pre><code>
+      docker compose up -d        #複数コンテナを立てる場合バックグラウンドで実行しdocker execコマンドで個別にアクセス
+      docker compose down         #コンテナの削除 ※ボリュームは削除されないためsqlデータは保持される
+    </code></pre>
+  </p>
+
+  <p>
+    <strong>注意</strong><br>
+    docker-compse.ymlに直接環境変数を書くのはセキュリティ上よくないので<a href="https://docs.docker.jp/compose/environment-variables.html">env</a>ファイルから読み込むようにする.
   </p>
 
   <h3>まとめ</h3>
-  <ul>
-    <li><strong>docker hub:</strong> docker imageが置いてある場所</li>
-    <li><strong>コンテナ:</strong> 仮想環境</li>
-    <li><strong>docker image:</strong> コンテナの設計図</li>
-    <li><strong>Dockerfile:</strong> docker imageを作成するためのファイル</li>
-    <li><strong>docker network:</strong> コンテナ間の通信を可能にする</li>
-    <li><strong>docker volume:</strong> データの永続化を行う</li>
-    <li><strong>バインドマウント:</strong> ホストマシンとコンテナのファイル変更を共有する</li>
-  </ul>
-
-  <h2>2. Djangoを使用したDockerの解説</h2>
-  <p>
-    概念図に沿って、コマンドと解説を行います。
-  </p>
-  <p>まず、GitHubからクローンします。</p>
-  <pre><code>git clone https://github.com/docker/getting-started.git</code></pre>
-
-  <p>次に、<code>getting-started/app</code>にDockerfileを作成します。</p>
-  <p>Dockerfileからdocker imageを作成するために、以下のコマンドを使用します。</p>
-  <pre><code>docker build -t demo .</code></pre>
 
   <p>
-    コンテナの起動は以下のコマンドです。
+    <strong>Docker Hub</strong>からイメージをダウンロードし,必要であれば<strong>Dockerfile</strong>を使って独自のイメージを作成しコンテナを起動する.コンテナ同士で通信するために<strong>Docker network</strong>を使用し、コンテナ内で利用したデータベースなどのデータを永続化するために<strong>Docker volume</strong>を使用する.
   </p>
-  <pre><code>docker run -dp 3000:3000 getting-started</code></pre>
 
-  <h2>3. 使用頻度の高いコマンド</h2>
-  <ul>
-    <li><strong>イメージの確認:</strong> <code>docker image ls</code></li>
-    <li><strong>コンテナの確認:</strong> <code>docker ps</code>（起動中のみ） / <code>docker ps -a</code>（全てのコンテナ）</li>
-    <li><strong>コンテナの削除:</strong> <code>docker rm -f &lt;container-id&gt;</code></li>
-    <li><strong>コンテナの停止:</strong> <code>docker stop &lt;container-id&gt;</code></li>
-    <li><strong>コンテナの起動:</strong> <code>docker start &lt;container-id&gt;</code></li>
-    <li><strong>ネットワークの作成:</strong> <code>docker network create &lt;name&gt;</code></li>
-    <li><strong>ボリュームの作成:</strong> <code>docker volume create &lt;name&gt;</code></li>
-  </ul>
-</div>
-
+  <p>
+    基本的なものを紹介しました.これでdocker tutorialで躓きにくくなったと思います.以上を踏まえたうえで<a href="https://docs.docker.jp/">Docker tutorial</a>に挑んでみてください.
+  </p>
 
   <hr>
-
-  <h2>コメント</h2>
-  <ul>
-    {% for comment in comments %}
-      <li><strong>{{ comment.user }}:</strong> {{ comment.comment }} <em>({{ comment.created_at }})</em></li>
-    {% empty %}
-      <li>まだコメントがありません。</li>
-    {% endfor %}
-  </ul>
-
-  <hr>
-
-  <h2>コメントを投稿する</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">投稿</button>
-  </form>
+  {% include 'blog/comments.html' %}
 {% endblock %}
