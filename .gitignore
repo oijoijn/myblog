@@ -2,11 +2,16 @@
 .cache/*
 .local/*
 .python_history/*
+.history/
+media/
+staticfiles/
+
 #file
 .env
 docker_tutorial.txt
 .python_history
 .bash_history
+error.txt
 
 #django
 *.log
@@ -14,3 +19,4 @@ docker_tutorial.txt
 __pycache__/
 db-volumes/
 db.sqlite3
+*/migrations/*

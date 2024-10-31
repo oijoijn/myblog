@@ -3,22 +3,36 @@
 <html lang="ja">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href='{% static "css/style.css" %}'/>
-  <title>Account</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href='{% static "css/style.css" %}' />
+    <title>技術探検</title>
 </head>
 
 <body>
-  <!-- <img src='{% static "images/test.png" %}' alt="表示できません"> -->
-  <div class="head">webサイト</div>
-  <div class="container mx-auto text-center">
-    {% block title %}
-    {% endblock %}
-    {% block content %}
-    {% endblock %}
-  </div>
+    <header class="header">
+        <div class="logo">
+            <h1><a href="{% url 'blog:index' %}">
+                <p>技術探検</p>
+            </a></h1>
+        </div>
+        <div class="auth-buttons">
+            <!-- loginボタンの動作 -->
+            {% if user.is_authenticated %}
+                <a href="{% url 'accounts:logout' %}" class="button">Logout</a>
+            {% else %}
+                <a href="{% url 'accounts:login' %}" class="button">Login</a>
+                <a href="{% url 'accounts:signup' %}" class="button">Signup</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <!-- <script src="{% static 'js/script.js' %}"></script> -->
 </body>
 
 </html>
