@@ -1,6 +1,11 @@
-from django.urls import path, include
+from django.urls import path  # type: ignore
+from django.conf import settings # type: ignore
+from django.conf.urls.static import static # type: ignore
 from . import views
 
+app_name = "blog"
+
 urlpatterns = [
-    path('self_introduction/', views.self_introduction),
+    path("", views.BlogPostListView.as_view(), name="index"),
+    path("article/<int:pk>/", views.BlogPostDetailView.as_view(), name="article_detail"),
 ]

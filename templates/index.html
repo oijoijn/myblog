@@ -1,25 +1,15 @@
 {% extends 'base.html' %}
-
-{% block title %}
-{% if user.is_authenticated %}
-<div class="h1">MyPage</div>
-{% else %}
-<div class="h1">Main</div>
-{% endif %}
-{% endblock %}
+{% load static %}
 
 {% block content %}
-<div class="header">
-{% if user.is_authenticated %}
-    <div class="h2">Welcome {{ user.username }}</div>
-    <div class="buttons">
-        <a href="{% url 'accounts:logout' %}" class="button">Logout</a>
-    </div>
-    <div class="buttons">
-        {% else %}
-        <a href="{% url 'accounts:signup' %}" class="button">Signup</a>
-        <a href="{% url 'accounts:login' %}" class="button">Login</a>
-    </div>
-    {% endif %}
+<div class="image-grid">
+    {% for article in articles %}
+    <h2>
+        <a href="{% url 'blog:article_detail' article.pk %}">
+            <img class="hover-image" src="{% static article.img_file %}" alt="表示できません">
+            <p>{{ article.title }} 作成日: {{ article.created_at }}</p>
+        </a>
+    </h2>
+    {% endfor %}
 </div>
 {% endblock %}
