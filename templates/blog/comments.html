@@ -1,7 +1,10 @@
   <h2 class="center">コメント</h2>
-  <ul class="center">
+  <ul class="comment-text">
     {% for comment in comments %}
-      <li><strong>{{ comment.user }}:</strong> {{ comment.comment }} <em>({{ comment.created_at }})</em></li>
+      <strong>{{ comment.user }}:</strong> 
+      {{ comment.comment }} <em>
+      ({{ comment.created_at }})</em>
+      <br>
     {% empty %}
       <p class="center">まだコメントがありません。</p>
     {% endfor %}

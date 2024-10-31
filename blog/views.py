@@ -51,7 +51,7 @@ class BlogPostDetailView(View):
         if request.user.is_authenticated:
             if form.is_valid():
                 comment = form.save(commit=False)
-                comment.article = article
+                comment.post = article  # 修正箇所
                 comment.user = request.user  # ログインユーザーを自動的に取得
                 comment.save()
                 return redirect('blog:article_detail', pk=article.pk) 
@@ -65,3 +65,7 @@ class BlogPostDetailView(View):
         }
 
         return render(request, template_name, dict)
+
+    # Commentモデルの__str__メソッド
+    def __str__(self):
+        return f"Comment by {self.user} on {self.post}"

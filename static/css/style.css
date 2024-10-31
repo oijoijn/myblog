@@ -8,13 +8,15 @@ body {
 
 /* ヘッダーのスタイル */
 .header {
+    height: 80px; /* 固定の高さ */
+    margin-bottom: 20px; /* ヘッダー下の余白 */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #4a4a4a; /* ダークグレー */
-    color: #ffffff; /* 白色 */
+    background-color: #4a4a4a;
+    color: #ffffff;
     padding: 15px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* ロゴ部分（左側） */
@@ -58,27 +60,42 @@ body {
 
 /* メインコンテナ */
 .container {
+    margin-right: 250px; /* Ensure enough space on the right for the TOC */
     padding: 20px;
-    margin-right: 250px; /* 目次のスペースを確保 */
-    background-color: #ffffff; /* 白色背景 */
-    border-radius: 8px; /* 角を丸く */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
+
+img {
+    max-width: 100%; /* Restrict image width to the container */
+    height: auto;
+}
+
+pre {
+    white-space: pre-wrap; /* Wrap long lines in <pre> */
+    word-wrap: break-word; /* Handle long words */
+    padding: 10px;
+    max-width: 100%; /* Constrain to container width */
+    overflow: auto; /* Add scroll if content overflows */
+    background-color: #f4f4f4; /* Optional: light background for better readability */
+    border-radius: 5px;
+}
+
 
 /* 目次の固定 */
 #toc {
     position: fixed;
-    right: 20px; /* 画面の右端から20pxの位置に固定 */
-    top: 100px; /* 画面の上から100pxの位置に固定 */
-    width: 220px; /* 目次の幅 */
-    background-color: #ffffff; /* 白色背景 */
+    right: 20px; /* Adjust as needed for spacing */
+    width: 200px; /* Set a width for TOC */
+    background-color: #f9f9f9; /* Optional: background for contrast */
     padding: 10px;
-    border: 1px solid #e0e0e0; /* 軽い境界線 */
-    border-radius: 8px; /* 角を丸く */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow */
+    top: calc(80px + 20px + 20px); /* ヘッダー高さ + 上下余白 */
     overflow: auto;
-    max-height: 80vh; /* 目次が画面外に出ないように制限 */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
 }
+
 
 #toc ul {
     list-style-type: none;
@@ -122,4 +139,27 @@ body {
 .hover-image:hover {
     transform: scale(1.05); /* 画像を少し拡大 */
     opacity: 0.9;          /* 少し透明に */
+}
+
+/* Adjust the text area size and wrapping */
+textarea {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-family: inherit; /* Ensures consistent font with the container */
+}
+
+/* Optional: If the container has specific font-size or line-height, apply here as well */
+.container textarea {
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.comment-text {
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }

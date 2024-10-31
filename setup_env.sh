@@ -8,7 +8,7 @@ elif [ "$1" = "s" ]; then
     python manage.py migrate
     python manage.py migrate accounts
     python manage.py migrate blog
-elif [ "$1" = "rs" ]; then
+elif [ "$1" = "srm" ]; then
     rm -rf db.sqlite3
     rm -rf accounts/migrations/
     rm -rf blog/migrations/

@@ -16,13 +16,15 @@
 
   {% include 'blog/article.html' %}
 
+  <div style="font-family: Arial, sans-serif; line-height: 1.6; padding: 20px;">
+  <hr>
   <p class="center">
     Dockerのチュートリアルを読んで理解するのに苦労したので,これからDockerを学ぶ方々の助けになればと思い書いています.また,公式ドキュメントを読むのが一番の勉強になると考えているのでここでは概念的な話を行います.
   </p>
 
   <p class="center">概念図1</p>
   <div class="center">
-  <img  src="{% static 'images/docker_tutorial_1.png' %}" alt="表示できません">
+  <img  src="{% static 'images/docker/docker_tutorial_1.png' %}" alt="表示できません">
   </div>
 
 
@@ -78,7 +80,7 @@
 
   <p class="center">概念図2</p>
   <div class="center">
-  <img  src="{% static 'images/docker_tutorial_2.png' %}" alt="表示できません">
+  <img  src="{% static 'images/docker/docker_tutorial_2.png' %}" alt="表示できません">
   </div>
 
   <p>
@@ -115,11 +117,11 @@
 
   <p class="center">概念図3</p>
   <div class="center">
-  <img  src="{% static 'images/docker_tutorial_3.png' %}" alt="表示できません">
+  <img  src="{% static 'images/docker/docker_tutorial_3.png' %}" alt="表示できません">
   </div>
 
   <p>
-    何度も言うことになりますが,コンテナは原則として他のコンテナやホストOSにアクセスすることができない.上記ではマウントによりホストosやDocker管理下のストレージとマウントする方法を紹介しましたここではコンテナ間の通信を行えるようにする.
+    何度も言うことになりますが,コンテナは原則として他のコンテナやホストOSにアクセスすることができない.ここではコンテナ間の通信を行えるようにする.
   </p>
 
   <h2 id="docker-network">3. Docker Network</h2>
@@ -131,7 +133,7 @@
 
   <p class="center">概念図4</p>
   <div class="center">
-  <img  src="{% static 'images/docker_tutorial_4.png' %}" alt="表示できません">
+  <img  src="{% static 'images/docker/docker_tutorial_4.png' %}" alt="表示できません">
   </div>
 
   <p>
@@ -190,13 +192,14 @@
   <h2 id="summary">5. まとめ</h2>
 
   <p>
-    <strong>Docker Hub</strong>からイメージをダウンロードし,必要であれば<strong>Dockerfile</strong>を使って独自のイメージを作成しコンテナを起動する.コンテナ同士で通信するために<strong>Docker network</strong>を使用し、コンテナ内で利用したデータベースなどのデータを永続化するために<strong>Docker volume</strong>を使用する.
+    <strong>Docker Hub</strong>からイメージをダウンロードし,必要であれば<strong>Dockerfile</strong>を使って独自のイメージを作成しコンテナを起動する.コンテナ同士で通信するために<strong>Docker Network</strong>を使用し、コンテナ内で利用したデータベースなどのデータを永続化するために<strong>Docker Volume</strong>を使用する.
   </p>
 
   <p>
-    基本的なものを紹介しました.これでdocker tutorialで躓きにくくなったと思います.以上を踏まえたうえで<a href="https://docs.docker.jp/">Docker tutorial</a>に挑んでみてください.
+    基本的なものを紹介しました.以上を踏まえたうえで<a href="https://docs.docker.jp/">Docker tutorial</a>に挑んでみてください.
   </p>
 
   <hr>
+  </div>
   {% include 'blog/comments.html' %}
 {% endblock %}

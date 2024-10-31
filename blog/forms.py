@@ -9,5 +9,10 @@ class CommentForm(forms.ModelForm):
         model = models.Comment
         fields = ["comment"]
         widgets = {
-            'text': forms.Textarea(attrs={'rows': 4, 'placeholder': 'コメントを入力してください...'}),
+            'comment': forms.Textarea(attrs={'rows': 4, 'placeholder': 'コメントを入力してください...'}),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # ラベルを空に設定
+        self.fields['comment'].label = ''
