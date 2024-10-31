@@ -1,6 +1,5 @@
 Django==4.2.16
 asgiref==3.8.1
-backports.zoneinfo==0.2.1
 django-environ==0.11.2
 mysqlclient==2.2.4
 pillow==10.4.0
