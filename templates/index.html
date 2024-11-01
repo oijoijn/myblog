@@ -6,7 +6,7 @@
     {% for article in articles %}
     <h2>
         <a href="{% url 'blog:article_detail' article.pk %}">
-            <img class="hover-image" src="{% static article.img_file %}" alt="表示できません">
+            <img  src="{% static article.img_file %}" alt="表示できません">
             <p>{{ article.title }} 作成日: {{ article.created_at }}</p>
         </a>
     </h2>
