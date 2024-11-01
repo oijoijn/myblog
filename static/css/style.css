@@ -121,25 +121,34 @@ pre {
     text-align: center !important;
 }
 
-/* グリッドレイアウト */
+/* index.html */
 .image-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3つのカラム 3つずつ表示 */
-    gap: 20px; /* 画像の間隔を調整 */
+    grid-template-columns: repeat(3, 1fr); /* 3つのカラムで均等配置 */
+    gap: 30px; /* 画像間のスペース */
+    padding: 20px; /* 全体の余白 */
 }
 
-/* 画像にホバー効果を追加 */
-.hover-image {
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    width: 100%; /* 画像がグリッド内でフィットするように */
+.image-grid h2 {
+    text-align: center; /* タイトルと画像を中央揃え */
+}
+
+.image-grid img {
+    max-width: 100%; /* 画像をカラムの幅に収める */
     height: auto;
+    transition: transform 0.3s; /* ホバー時のアニメーション */
 }
 
-/* ホバー時の効果 */
-.hover-image:hover {
-    transform: scale(1.05); /* 画像を少し拡大 */
-    opacity: 0.9;          /* 少し透明に */
+.image-grid img:hover {
+    transform: scale(1.05); /* ホバーで少し拡大 */
 }
+
+.image-grid p {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #555; /* テキストカラーの調整 */
+}
+
 
 /* Adjust the text area size and wrapping */
 textarea {
