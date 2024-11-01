@@ -73,7 +73,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': env('NAME'),  # データベース名
-        'USER': env('USER'),  # ユーザー名
+        'USER': env('USER_env'),  # ユーザー名
         'PASSWORD': env('PASSWORD'),  # パスワード
         'HOST': env('HOST'),  # ホスト名
         'PORT': env('PORT'),  # MySQLのデフォルトポート
