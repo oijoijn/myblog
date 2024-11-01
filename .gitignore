@@ -5,6 +5,8 @@
 .history/
 media/
 staticfiles/
+static/images/output_images/
+static/images/input_images/
 
 #file
 .env

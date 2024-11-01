@@ -8,10 +8,12 @@ elif [ "$1" = "s" ]; then
     python manage.py migrate
     python manage.py migrate accounts
     python manage.py migrate blog
-elif [ "$1" = "srm" ]; then
+elif [ "$1" = "rms" ]; then
     rm -rf db.sqlite3
     rm -rf accounts/migrations/
     rm -rf blog/migrations/
 elif [ "$1" = "c" ]; then
     python manage.py createsuperuser
+elif [ "$1" = "cc" ]; then
+    python manage.py collectstatic
 fi
