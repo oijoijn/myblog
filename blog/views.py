@@ -90,6 +90,7 @@ class EditCommentView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def get_success_url(self):
         return reverse_lazy('blog:article_detail', kwargs={'pk': self.object.post.pk})
 
+    #ture or false を返す, loginuserで自分子コメントしか編集できない
     def test_func(self):
         comment = self.get_object()
         return comment.user == self.request.user
