@@ -46,6 +46,6 @@ class UserCommentsView(LoginRequiredMixin, ListView):
     template_name = 'accounts/user_comments.html'
     context_object_name = 'comments'
 
+    # ログインユーザーのコメントのみを取得
     def get_queryset(self):
-        # ログインユーザーのコメントのみを取得
         return Comment.objects.filter(user=self.request.user)
