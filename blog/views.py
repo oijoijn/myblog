@@ -9,7 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 from . import models, forms
 
-class BlogPostListView(LoginRequiredMixin, ListView):
+class BlogPostListView(ListView):
     """
     動作:記事を表示する
     """
