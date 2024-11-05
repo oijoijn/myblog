@@ -1,9 +1,10 @@
 from django.contrib.auth import login, authenticate
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+from blog.models import Comment
 from . import forms
-
 
 class SignupView(CreateView):
     """
@@ -35,3 +36,16 @@ class LogoutView(LogoutView):
     動作:logout
     """
     success_url = reverse_lazy("blog:index")
+
+class UserCommentsView(LoginRequiredMixin, ListView):
+    '''
+    動作:コメントの取得
+    loginuserしかできない
+    '''
+    model = Comment
+    template_name = 'accounts/user_comments.html'
+    context_object_name = 'comments'
+
+    def get_queryset(self):
+        # ログインユーザーのコメントのみを取得
+        return Comment.objects.filter(user=self.request.user)
