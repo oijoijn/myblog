@@ -44,7 +44,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD ログイン時にusernameとpassword(自動使用)を使用
     """
     username = models.CharField(max_length=32, unique=True)
-    email = models.EmailField(max_length=255, unique=True, null=True, blank=True)  
+    email = models.EmailField(max_length=255, unique=True, null=True, blank=True)
 
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
@@ -57,3 +57,4 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.username
+

@@ -1,0 +1,14 @@
+<!-- templates/blog/edit_comment.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="center">
+  <h2>コメントの編集</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">送信</button>
+  </form>
+  <a href="{% url 'accounts:user_comments' %}">コメント一覧に戻る</a>
+</div>
+{% endblock %}

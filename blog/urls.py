@@ -8,4 +8,5 @@ app_name = "blog"
 urlpatterns = [
     path("", views.BlogPostListView.as_view(), name="index"),
     path("article/<int:pk>/", views.BlogPostDetailView.as_view(), name="article_detail"),
+    path('comment/edit/<int:pk>/', views.EditCommentView.as_view(), name='edit_comment'),
 ]
