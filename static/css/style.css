@@ -26,6 +26,11 @@ body {
     text-align: center; /* 中央揃え */
 }
 
+.logo a {
+    text-decoration: none; /* リンクの下線を消す */
+    color: inherit; /* 親要素の色を継承 */
+}
+
 .logo p {
     color: #19d8f6; /* テキスト色を青に */
     font-weight: bold; /* 太字に */
@@ -37,6 +42,7 @@ body {
 .logo p:hover {
     color: #0056b3; /* ホバー時に色を濃い青に */
 }
+
 
 
 /* 認証ボタン（右側） */
