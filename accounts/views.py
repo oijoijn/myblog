@@ -1,9 +1,11 @@
 from django.contrib.auth import login, authenticate
 from django.shortcuts import redirect
-from django.views.generic import CreateView, ListView, UpdateView
+from django.views.generic import CreateView, ListView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.views import PasswordChangeView
 from blog.models import Comment
 from . import forms, models
 
@@ -51,12 +53,7 @@ class UserCommentsView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Comment.objects.filter(user=self.request.user)
 
-class UserUpdateView(LoginRequiredMixin, UpdateView):
-    model = models.CustomUser
-    form_class = forms.UserUpdateForm
+class ChangePasswordView(PasswordChangeView):
+    form_class = PasswordChangeForm
+    success_url = reverse_lazy('blog:index')
     template_name = 'accounts/user_update.html'
-    success_url = reverse_lazy('accounts:user_update') 
-
-    def get_object(self):
-        # 現在のログインユーザーを返す
-        return self.request.user

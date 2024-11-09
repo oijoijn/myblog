@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2 class="center">ユーザー情報の編集</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">更新</button>
-    </form>
-<hr>
-
+<div class="change-password">
+    <h2 class="center_">パスワードの変更</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit" class="button-change-password">更新</button>
+        </form>
+    <hr>
+</div>
 <a href="{% url 'accounts:user_comments' %}">コメント一覧</a>
 {% endblock %}

@@ -45,17 +45,8 @@ class LoginForm(AuthenticationForm):
         self.fields['username'].widget.attrs['placeholder'] = 'ニックネームを入力してください'
         self.fields['password'].widget.attrs['placeholder'] = 'パスワードを入力してください'  # パスワードフィールドにplaceholderを追加
 
-class UserUpdateForm(forms.ModelForm):
-    """
-    動作:ログインユーザーの編集
-    """
-    # password = ReadOnlyPasswordHashField(label="Password")
 
-    class Meta:
-        model = models.CustomUser
-        fields = ["username", "password"]
-
-# class UserUpdateForm(forms.Form):
-#     old_password = forms.CharField(widget=forms.PasswordInput())
-#     new_password = forms.CharField(widget=forms.PasswordInput())
-#     confirm_password = forms.CharField(widget=forms.PasswordInput())
+class ChangePassword(forms.Form):
+    old_password = forms.CharField(widget=forms.PasswordInput())
+    new_password = forms.CharField(widget=forms.PasswordInput())
+    confirm_password = forms.CharField(widget=forms.PasswordInput())
