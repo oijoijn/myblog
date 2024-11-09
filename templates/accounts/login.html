@@ -4,7 +4,7 @@
 <div class="login">
     <form method="post">
         {% csrf_token %}
-        
+
         <!-- エラーメッセージの表示 -->
         {% if form.errors %}
             <div class="form-errors">
@@ -17,7 +17,7 @@
                 </ul>
             </div>
         {% endif %}
-        
+
         <!-- ユーザー名の入力フィールド -->
         {{ form.username }}
 
