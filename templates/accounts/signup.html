@@ -4,9 +4,29 @@
 <div class="signup">
   <form method="POST">
     {% csrf_token %}
-    {{ form.username }} <!-- ユーザー名の入力フィールド -->
-    {{ form.password1 }} <!-- パスワードの入力フィールド -->
-    {{ form.password2 }} <!-- パスワードの入力フィールド -->
+
+    <!-- エラーメッセージの表示 -->
+    {% if form.errors %}
+      <div class="form-errors">
+        <ul>
+          {% for field in form %}
+            {% for error in field.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    <!-- ユーザー名の入力フィールド -->
+    {{ form.username }}
+
+    <!-- パスワードの入力フィールド -->
+    {{ form.password1 }}
+
+    <!-- パスワードの確認入力フィールド -->
+    {{ form.password2 }}
+
     <button type="submit" class="button-create">Create</button>
   </form>
 </div>

@@ -9,7 +9,7 @@ services:
       TZ: "${TZ}"
       MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
       MYSQL_DATABASE: "${NAME}"
-      MYSQL_USER: "${USER}"
+      MYSQL_USER: "${USER_env}"
 
   django:
     build: .

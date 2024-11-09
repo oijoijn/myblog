@@ -1,10 +1,11 @@
 from django.contrib.auth import login, authenticate
-from django.views.generic import CreateView, ListView
+from django.shortcuts import redirect
+from django.views.generic import CreateView, ListView, UpdateView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from blog.models import Comment
-from . import forms
+from . import forms, models
 
 class SignupView(CreateView):
     """
@@ -49,3 +50,13 @@ class UserCommentsView(LoginRequiredMixin, ListView):
     # ログインユーザーのコメントのみを取得
     def get_queryset(self):
         return Comment.objects.filter(user=self.request.user)
+
+class UserUpdateView(LoginRequiredMixin, UpdateView):
+    model = models.CustomUser
+    form_class = forms.UserUpdateForm
+    template_name = 'accounts/user_update.html'
+    success_url = reverse_lazy('accounts:user_update') 
+
+    def get_object(self):
+        # 現在のログインユーザーを返す
+        return self.request.user
