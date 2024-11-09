@@ -15,6 +15,6 @@
   <h2 class="center">コメントを投稿する</h2>
   <form class="center" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form }}
     <button type="submit">投稿</button>
   </form>

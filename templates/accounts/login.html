@@ -4,8 +4,26 @@
 <div class="login">
     <form method="post">
         {% csrf_token %}
-        {{ form.username }} <!-- ユーザー名の入力フィールド -->
-        {{ form.password }} <!-- パスワードの入力フィールド -->
+        
+        <!-- エラーメッセージの表示 -->
+        {% if form.errors %}
+            <div class="form-errors">
+                <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        
+        <!-- ユーザー名の入力フィールド -->
+        {{ form.username }}
+
+        <!-- パスワードの入力フィールド -->
+        {{ form.password }}
+
         <button type="submit" class="button-login">Login</button>
     </form>
 </div>

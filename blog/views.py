@@ -1,8 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import ListView, UpdateView
 from django.views import View
-from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
 from django.http import Http404
 from django.template.exceptions import TemplateDoesNotExist
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -23,12 +21,16 @@ class BlogPostListView(ListView):
         context['username'] = self.request.user.username
         return context
 
-@method_decorator(login_required, name='dispatch')
 class BlogPostDetailView(View):
     """
     動作:記事詳細ビュー & コメント投稿 (DetailView + View)
-    クラスベースビューにログインを要求する
+    postはログインユーザー限定
     """
+    def dispatch(self, request, *args, **kwargs):
+        # POSTリクエストのみ認証チェック
+        if request.method == "POST" and not request.user.is_authenticated:
+            return redirect('accounts:login')  # ログインページにリダイレクト
+        return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, pk):
         article = get_object_or_404(models.BlogPost, pk=pk)
@@ -37,10 +39,11 @@ class BlogPostDetailView(View):
 
         # pkに基づいてテンプレート名を動的に決定
         template_name = article.html_file
+        print(template_name)
 
         # テンプレートが存在しない場合に404を返すためのチェック
         dict = {
-                'article': article, 
+                'article' : article,
                 'comments': comments, 
                 'form': form
             }
@@ -53,6 +56,14 @@ class BlogPostDetailView(View):
         article = get_object_or_404(models.BlogPost, pk=pk)
         comments = article.comments.all()
         form = forms.CommentForm(request.POST)
+        # pkに基づいてテンプレート名を動的に決定
+        template_name = article.html_file
+
+        dict = {
+            'article' : article,
+            'comments': comments,
+            'form': form
+        }
 
         # ログインユーザーのみコメント可能にする
         if request.user.is_authenticated:
@@ -61,15 +72,7 @@ class BlogPostDetailView(View):
                 comment.post = article  # 修正箇所
                 comment.user = request.user  # ログインユーザーを自動的に取得
                 comment.save()
-                return redirect('blog:article_detail', pk=article.pk) 
-
-        # pkに基づいてテンプレート名を動的に決定
-        template_name = f'blog/docker_tutorial_{pk}.html'
-        dict = {
-            'article': article,
-            'comments': comments,
-            'form': form
-        }
+                return  redirect('blog:article_detail', pk=article.pk)
 
         return render(request, template_name, dict)
 
