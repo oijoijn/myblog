@@ -7,12 +7,12 @@
     <h2>目次</h2>
     <ul>
       <li><a href='#pc-key'>1. パソコンを使いやすくするために</a></li>
-      <li><a href='#Change-Key '>2. Change Key</a></li>
-      <li><a href='#PowerToys'>3. PowerToys</a></li>
-      <li><a href='#AutoHotkey'>4. AutoHotkey</a></li>
-      <li><a href='#まとめ'>5. まとめ</a></li>
+      <li><a href='#change-key'>2. Change Key</a></li>
+      <li><a href='#powertoys'>3. PowerToys</a></li>
+      <li><a href='#autohotkey'>4. AutoHotkey</a></li>
+      <li><a href='#summary'>5. まとめ</a></li>
       <li><a href='#vscode-vim'>番外編. Vscode Vim</a></li>
-      <li><a href='#Chrome-vimium'>番外編. Chrome Vim</a></li>
+      <li><a href='#chrome-vimium'>番外編. Chrome Vimium</a></li>
     </ul>
   </div>
 
@@ -20,48 +20,46 @@
   <div style='font-family: Arial, sans-serif; line-height: 1.6; padding: 20px;'>
 
   <h2 id='pc-key'>1. パソコンを使いやすくするために</h2>
-  <p>皆さんショートカットキーを使用していますか?パソコンのショートカットキーを使用することで以下のような操作が可能になります.どうですか?!これマウス,矢印キーを使用していません!</p>
+  <p>皆さんショートカットキーを使用していますか？パソコンのショートカットキーを使用することで以下のような操作が可能になります.下のgifはマウス,矢印キーを使用していません！</p>
 
-  <!-- <a src="{% static 'gif/key/key.gif' %}">表示できません</a> -->
   <img src="{% static 'gif/key/key.gif' %}" alt="表示できません" />
 
-
   <p>
-  後述するがキーバインドを変更した場合以下の優先順位となる<br>
-  Change Key     >       PowerToys       >       AutoHotkey     >       ソフトウェア
+  後述しますが,キーバインドを変更した場合の優先順位は以下の通りです.<br>
+  Change Key > PowerToys > AutoHotkey > ソフトウェア
   </p>
 
-  <h2 id='Change-Key'>2. Change Key</h2>
-  <a href="https://forest.watch.impress.co.jp/library/software/changekey/">Change Key</a>を使用することでCtrlとCapsLockを交換できる.欠点としてレジストリをいじることになるので社内のpcなどで使用できない可能性がある.また,1対1のキーに対して行うためショートカットキーの登録のし直しなどができない.
+  <h2 id='change-key'>2. Change Key</h2>
+  <p><a href="https://forest.watch.impress.co.jp/library/software/changekey/">Change Key</a>を使用すると,CtrlキーとCapsLockキーを入れ替えられます.欠点として,レジストリを操作するため,社内のPCなどでは使用できない可能性があります.また,キーに対しては再登録を行えるのですが,ショートカットキーに対しては再登録などができません.</p>
 
-  <h2 id='PowerToys'>3. PowerToys</h2>
-  <a href="https://learn.microsoft.com/ja-jp/windows/powertoys/install">PowerToys</a>でショートカットキーの登録のし直しができる.また,Microsoftが提供しているので安心してインストールすることができる.注意点としてPowerToysでCtrlとCapslockを入れ替えると動作が安定しないためChange keyもしくはレジストリを直接書き換えることをおすすめする.
+  <h2 id='powertoys'>3. PowerToys</h2>
+  <p><a href="https://learn.microsoft.com/ja-jp/windows/powertoys/install">PowerToys</a>を使用すると,ショートカットキーの再登録ができます.また,Microsoftが提供しているため,安心してインストールできます.注意点として,PowerToysでCtrlキーとCapsLockキーを入れ替えると動作が不安定になるため,Change Keyまたはレジストリを直接書き換えることをおすすめします.</p>
 
   <p>
-  豆知識:Ctrl [でja,eu配列のキーボードどちらもEscキーと似たような動作を行うがEscキーと同じ動作ではないため登録することをおすすめする.
+  豆知識：Ctrl+[ で日本語配列・英語配列キーボードどちらもEscキーと似たような動作をしますが,Escキーと完全に同じ動作ではないため,別途登録することをおすすめします.
   </p>
 
-  <h2 id='AutoHotkey'>4. AutoHotkey</h2>
-  <a href="https://www.autohotkey.com/">AutoHotkey</a>
-    はプログラミング言語で上記より自由度の高い設定を行えるがWindows11との相性が悪いのか動作が一番安定しない.しかしマウスの動作制御,キー,ショートカットキーの入れ替えなどができAutoHotkeyでできないことはほとんどないと言える.
+  <h2 id='autohotkey'>4. AutoHotkey</h2>
+  <p><a href="https://www.autohotkey.com/">AutoHotkey</a>はプログラミング言語であり,上記ツールよりも自由度の高い設定を行えます.しかし,Windows 11との相性が悪いのか,動作が一番安定しません.それでも,マウスの動作制御,キー,ショートカットキーの入れ替えなどが可能で,AutoHotkeyでできないことはほとんどないと言えます.
+  </p>
 
-    gif
-
-  <h2 id='まとめ'>3. まとめ</h2>
-  キーの入れ替え=Change Key<br>
-  ショートカットキーの入れ替え=PowerToys<br>
-  それ以外の入れ替え=AutoHotkey<br>
+  <h2 id='summary'>5. まとめ</h2>
+  <p>
+    キーの入れ替え = Change Key<br>
+    ショートカットキーの入れ替え = PowerToys<br>
+    それ以外の高度な設定 = AutoHotkey<br>
+  </p>
 
   <p>
   キーバインドを変更した場合の優先順位<br>
-  Change Key     >       PowerToys       >       AutoHotkey     >       ソフトウェア
+  Change Key > PowerToys > AutoHotkey > ソフトウェア
   </p>
 
   <h2 id='vscode-vim'>番外編. Vscode Vim</h2>
-  Vscodeの拡張機能にVimがあります.Vimとはエディターの一種でキーボードだけでカーソルの動画できファイルの編集が可能になります.ターミナルでviやvimと入力することで起動ができる.
+  <p>Vscodeの拡張機能にVimがあります.Vimとはエディターの一種で,キーボードだけでカーソル移動やファイル編集が可能になります.Vimをインストールすることでプログラミング中もホームポジションを崩さずに操作することが可能になります.</p>
 
-  <h2 id='Chrome-vimium'>番外編. Chrome Vimium</h2>
-  <a href="https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=ja">Vimium</a>とはGoogle Chromeに対してVimのような操作を提供する拡張機能である.Shift j, Shift kでタブの移動が可能だがPDFを開いてしまうとタブの移動が行われないそのためPowerToysでShift j,Shift kをCtrl Tab, Ctrl Shift Tabに変更するのをお勧めする.<a href="https://support.google.com/chrome/answer/157179?hl=ja&co=GENIE.Platform%3DDesktop#zippy=%2C%E3%82%BF%E3%83%96%E3%81%A8%E3%82%A6%E3%82%A3%E3%83%B3%E3%83%89%E3%82%A6%E3%81%AE%E3%82%B7%E3%83%A7%E3%83%BC%E3%83%88%E3%82%AB%E3%83%83%E3%83%88">Chromeに対してのショートカットキー</a>
+  <h2 id='chrome-vimium'>番外編. Chrome Vimium</h2>
+  <p><a href="https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=ja">Vimium</a>は,Google Chromeに対してVimのような操作を提供する拡張機能です.Shift + j, Shift + kでタブの移動が可能ですが,PDFを開くとタブの移動が機能しません.そのため,PowerToysでShift + j, Shift + kをCtrl + Tab, Ctrl + Shift + Tabに再登録することをおすすめします.<a href="https://support.google.com/chrome/answer/157179?hl=ja&co=GENIE.Platform%3DDesktop#zippy=%2C%E3%82%BF%E3%83%96%E3%81%A8%E3%82%A6%E3%82%A3%E3%83%B3%E3%83%89%E3%82%A6%E3%81%AE%E3%82%B7%E3%83%A7%E3%83%BC%E3%83%88%E3%82%AB%E3%83%83%E3%83%88">Chromeのショートカットキー</a></p>
   </div>
   {% include 'blog/comments.html' %}
   </div>
