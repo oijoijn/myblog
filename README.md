@@ -1,20 +1,27 @@
 ## 1 myblog
-    面白そうな技術や触ったことのある技術を紹介するサイト
+#### 1 目的
+        面白そうな技術や触ったことのある技術を紹介するサイト
+#### 2 URL
+        https://technologicalexploration.pythonanywhere.com/blog/
 
-#### 1 URL
-https://technologicalexploration.pythonanywhere.com/blog/
+#### 4 機能要件(CRUD処理◦会員機能)
+        会員機能
+        コメント機能
+        コメント編集機能
 
-#### 2 mysql
-保存するもの
-    accounts
-        ニックネーム
-        パスワードをハッシュ化したものを保存
-    blog
-        ブログのタイトル
-        ブログのpath
-        イメージ画像
+#### 5 非機能要件
+        データベースで保存するもの
+            accounts:
+                ニックネーム
+                パスワードをハッシュ化したものを保存
+            blog:
+                ブログのタイトル
+                ブログのpath
+                ブログのイメージ画像
 
-## 2 主要技術
+## 2 設計◦仕様書
+
+## 3 主要技術
 |使用言語・フレームワーク|バージョン|
 |------------------------|----------|
 |Python                  | 3.8      |
@@ -28,7 +35,7 @@ https://technologicalexploration.pythonanywhere.com/blog/
 |Docker         |27.2.0         |
 |Shell Script   |               |
 
-## 3 コマンド一覧
+## 4 コマンド一覧
 
 |コマンド                                   | 処理                          |
 |------------------------------------------|-------------------------------|
@@ -41,9 +48,9 @@ https://technologicalexploration.pythonanywhere.com/blog/
 |bash setup_env.sh rms                       |データベースの削除            |
 |bash setup_env.sh c                       |rootユーザの作成           |
 
-## 4 ディレクトリ構成
+## 5 ディレクトリ構成
 
-'''
+```
 .
 ├── Dockerfile
 ├── README.md
@@ -123,4 +130,4 @@ https://technologicalexploration.pythonanywhere.com/blog/
     └── index.html
 
 20 directories, 57 files
-'''
+```
