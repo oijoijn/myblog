@@ -43,6 +43,7 @@
 |docker compose down                       |コンテナを停止と削除           |
 |docker exec -it myblog-django-1 /bin/bash |コンテナに仮想端末を割り当てる |
 |winpty docker exec -it myblog-django-1 //bin//bash |git bashを使用している場合     |
+|docker exec -it myblog-mysql-1 mysql -u root -p|mysqlコンテナに接続|
 |bash setup_env.sh r                       |djangoのサーバを起動           |
 |bash setup_env.sh s                       |データベースのマイグレーション            |
 |bash setup_env.sh rms                       |データベースの削除            |
